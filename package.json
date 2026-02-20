@@ -22,7 +22,11 @@
     "url": "https://github.com/proplayer919/zue/issues"
   },
   "homepage": "https://github.com/proplayer919/zue#readme",
+  "bin": {
+    "zue": "./bin/zue.cjs"
+  },
   "files": [
+    "bin",
     "src",
     "README.md",
     "LICENSE"
