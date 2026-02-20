@@ -1,0 +1,21 @@
+{
+  "name": "zue",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@types/blessed": "^0.1.27",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "mathjs": "^15.1.1"
+  }
+}
