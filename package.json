@@ -1,6 +1,6 @@
 {
   "name": "zuejs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Terminal math editor for context-based symbolic and numeric computations.",
   "module": "src/index.ts",
   "type": "module",
