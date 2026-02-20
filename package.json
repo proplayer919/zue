@@ -1,17 +1,44 @@
 {
-  "name": "zue",
+  "name": "zuejs",
+  "version": "0.1.0",
+  "description": "Terminal math editor for context-based symbolic and numeric computations.",
   "module": "src/index.ts",
   "type": "module",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "author": "proplayer919",
+  "keywords": [
+    "math",
+    "terminal",
+    "bun",
+    "cli",
+    "symbolic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proplayer919/zue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/proplayer919/zue/issues"
+  },
+  "homepage": "https://github.com/proplayer919/zue#readme",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "bun src/index.ts",
-    "dev": "bun --watch src/index.ts"
+    "dev": "bun --watch src/index.ts",
+    "check": "tsc --noEmit",
+    "prepublishOnly": "npm run check"
   },
   "devDependencies": {
     "@types/blessed": "^0.1.27",
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
+    "@types/bun": "latest",
     "typescript": "^5"
   },
   "dependencies": {
