@@ -1,9 +1,15 @@
 import blessed from "blessed";
+import { spawnSync } from "node:child_process";
 import { computeInput } from "./compute";
 
 const DEFAULT_EDITOR_VALUE = "a = 8\nb = 3 * a\nf(x) = x^2 + b\na + b = ?\nf(4) = ?";
 
 export function runTerminalApp(): void {
+  const shouldManageFlowControl = process.platform !== "win32";
+  if (shouldManageFlowControl) {
+    spawnSync("stty", ["-ixon"], { stdio: "inherit" });
+  }
+
   const screen = blessed.screen({
     smartCSR: true,
     title: "Zue Math Editor",
@@ -111,6 +117,14 @@ export function runTerminalApp(): void {
 
   let mode: "editor" | "results" = "editor";
 
+  const quitApp = (): void => {
+    if (shouldManageFlowControl) {
+      spawnSync("stty", ["ixon"], { stdio: "inherit" });
+    }
+    screen.destroy();
+    process.exit(0);
+  };
+
   const setStatus = (message: string): void => {
     status.setContent(` ${message} `);
   };
@@ -185,9 +199,15 @@ export function runTerminalApp(): void {
     }
   });
 
-  screen.key(["C-q", "escape"], () => {
-    screen.destroy();
-    process.exit(0);
+  const quitKeys = ["C-q", "C-c", "escape"];
+  screen.key(quitKeys, quitApp);
+  editor.key(quitKeys, quitApp);
+  results.key(quitKeys, quitApp);
+
+  process.once("exit", () => {
+    if (shouldManageFlowControl) {
+      spawnSync("stty", ["ixon"], { stdio: "inherit" });
+    }
   });
 
   showEditor();
